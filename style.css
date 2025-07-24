@@ -1,0 +1,568 @@
+/* Reset y variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #4ecdc4;
+    --accent-color: #ffe66d;
+    --purple-color: #a8e6cf;
+    --orange-color: #ff8b94;
+    --pink-color: #ffaaa5;
+    --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-card: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-button: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --shadow-main: 0 20px 40px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.2);
+    --border-radius: 20px;
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--gradient-bg);
+    min-height: 100vh;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3.5rem;
+    color: white;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+    animation: bounce 2s infinite;
+}
+
+.subtitle {
+    font-size: 1.4rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Área del juego */
+.game-area {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    box-shadow: var(--shadow-main);
+    backdrop-filter: blur(10px);
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+/* Contenedor del dado */
+.dice-container {
+    perspective: 1000px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.dice {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+    cursor: pointer;
+}
+
+.dice:hover {
+    transform: rotateX(15deg) rotateY(15deg) scale(1.1);
+}
+
+.dice-face {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: var(--gradient-card);
+    border: 3px solid white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dice-1 { transform: rotateY(0deg) translateZ(60px); }
+.dice-2 { transform: rotateY(90deg) translateZ(60px); }
+.dice-3 { transform: rotateY(180deg) translateZ(60px); }
+.dice-4 { transform: rotateY(-90deg) translateZ(60px); }
+.dice-5 { transform: rotateX(90deg) translateZ(60px); }
+.dice-6 { transform: rotateX(-90deg) translateZ(60px); }
+
+.dot {
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    margin: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Distribución de puntos en cada cara */
+.dice-1 .dot { margin: auto; }
+
+.dice-2 .dot:first-child { margin: 10px 10px auto auto; }
+.dice-2 .dot:last-child { margin: auto auto 10px 10px; }
+
+.dice-3 .dot:first-child { margin: 10px 10px auto auto; }
+.dice-3 .dot:nth-child(2) { margin: auto; }
+.dice-3 .dot:last-child { margin: auto auto 10px 10px; }
+
+.dice-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.dice-5 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 15px;
+}
+.dice-5 .dot:nth-child(3) {
+    grid-column: 1 / 3;
+    justify-self: center;
+}
+
+.dice-6 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 15px;
+}
+
+/* Animaciones del dado */
+.dice.rolling {
+    animation: rollDice 2s ease-in-out;
+}
+
+@keyframes rollDice {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    25% { transform: rotateX(180deg) rotateY(180deg) scale(1.2); }
+    50% { transform: rotateX(360deg) rotateY(360deg) scale(0.8); }
+    75% { transform: rotateX(540deg) rotateY(540deg) scale(1.1); }
+    100% { transform: rotateX(720deg) rotateY(720deg) scale(1); }
+}
+
+/* Botón de tirar */
+.button-container {
+    margin-bottom: 30px;
+}
+
+.roll-button {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    padding: 20px 40px;
+    background: var(--gradient-button);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.roll-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(79, 172, 254, 0.6);
+}
+
+.roll-button:active {
+    transform: translateY(-2px);
+}
+
+.roll-button:disabled {
+    background: linear-gradient(135deg, #ccc 0%, #999 100%);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.roll-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.roll-button:hover::before {
+    left: 100%;
+}
+
+.attempts-info {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Área de resultado */
+.result-area {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease;
+    margin-bottom: 20px;
+}
+
+.result-area.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.result-card {
+    background: var(--gradient-card);
+    color: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-main);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.result-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.result-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.prize-icon {
+    font-size: 4rem;
+    margin: 20px 0;
+    animation: pulse 2s infinite;
+}
+
+.prize-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.timestamp {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+/* Sección de premios */
+.prizes-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow-main);
+    backdrop-filter: blur(10px);
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 800px;
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.prizes-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.prizes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.prize-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--orange-color) 100%);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.prize-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.prize-number {
+    font-size: 2rem;
+    margin-right: 15px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.prize-description {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    color: white;
+    animation: fadeInUp 1s ease-out 0.9s both;
+    position: relative;
+}
+
+.footer p {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.small-text {
+    font-size: 0.9rem !important;
+    opacity: 0.8;
+}
+
+/* Botón de reset para desarrolladores */
+.dev-reset-button {
+    position: absolute;
+    bottom: -40px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    font-family: 'Courier New', monospace;
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dev-reset-button:hover {
+    opacity: 1;
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    transform: scale(1.05);
+}
+
+.dev-reset-button:active {
+    background: rgba(0, 255, 0, 0.2);
+    transform: scale(0.95);
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .game-area {
+        padding: 25px;
+    }
+    
+    .dice {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .dice-face {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .dice-1 { transform: rotateY(0deg) translateZ(50px); }
+    .dice-2 { transform: rotateY(90deg) translateZ(50px); }
+    .dice-3 { transform: rotateY(180deg) translateZ(50px); }
+    .dice-4 { transform: rotateY(-90deg) translateZ(50px); }
+    .dice-5 { transform: rotateX(90deg) translateZ(50px); }
+    .dice-6 { transform: rotateX(-90deg) translateZ(50px); }
+    
+    .roll-button {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+    }
+    
+    .result-title {
+        font-size: 1.5rem;
+    }
+    
+    .prize-icon {
+        font-size: 3rem;
+    }
+    
+    .prizes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .prizes-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .game-area {
+        padding: 20px;
+    }
+    
+    .dice {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .dice-face {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .dice-1 { transform: rotateY(0deg) translateZ(40px); }
+    .dice-2 { transform: rotateY(90deg) translateZ(40px); }
+    .dice-3 { transform: rotateY(180deg) translateZ(40px); }
+    .dice-4 { transform: rotateY(-90deg) translateZ(40px); }
+    .dice-5 { transform: rotateX(90deg) translateZ(40px); }
+    .dice-6 { transform: rotateX(-90deg) translateZ(40px); }
+    
+    .dot {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .roll-button {
+        font-size: 1rem;
+        padding: 12px 25px;
+    }
+    
+    .prize-item {
+        padding: 12px 15px;
+    }
+    
+    .prize-number {
+        font-size: 1.5rem;
+        margin-right: 10px;
+    }
+    
+    .prize-description {
+        font-size: 1rem;
+    }
+}
