@@ -2,11 +2,11 @@
 const GAME_CONFIG = {
     prizes: {
         1: { text: "5% de descuento", icon: "🎫", color: "#ff6b6b" },
-        2: { text: "Galleta gratis", icon: "🍪", color: "#4ecdc4" },
-        3: { text: "10% de descuento", icon: "🎟️", color: "#ffe66d" },
-        4: { text: "Mini manzanabox gratis", icon: "🍎", color: "#a8e6cf" },
-        5: { text: "15% de descuento", icon: "🎊", color: "#ff8b94" },
-        6: { text: "Combo sorpresa", icon: "🎁", color: "#ffaaa5" }
+        2: { text: "Gomiloca Gratis", icon: "🍬", color: "#4ecdc4" },
+        3: { text: "¡Suerte para la próxima!", icon: "🎁", color: "#ffaaa5" },
+        4: { text: "Pepinos Locos Extra", icon: "🥒", color: "#a8e6cf" },
+        5: { text: "¡Suerte para la próxima!", icon: "😅", color: "#ff8b94" },
+        6: { text: "10% de descuento", icon: "🎟️", color: "#ffe66d" },
     },
     storageKey: 'snackDiceGame_hasPlayed',
     animationDuration: 2000
