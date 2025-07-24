@@ -1,8 +1,8 @@
 // Configuración del juego
 const GAME_CONFIG = {
     prizes: {
-        1: { text: "5% de descuento", icon: "🎫", color: "#ff6b6b" },
-        2: { text: "¡Suerte para la próxima!", icon: "😅", color: "#ff8b94" },
+        1: { text: "¡Suerte para la próxima!", icon: "😅", color: "#ff8b94" },
+        2: { text: "5% de descuento", icon: "🎫", color: "#ff6b6b" },
         3: { text: "¡Suerte para la próxima!", icon: "😅", color: "#ffaaa5" },
         4: { text: "Pepinos Locos Extra", icon: "🥒", color: "#a8e6cf" },
         5: { text: "¡Suerte para la próxima!", icon: "😅", color: "#ff8b94" },
