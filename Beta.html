@@ -1,0 +1,14 @@
+function checkUserStatus() {
+    const savedData = localStorage.getItem(GAME_CONFIG.storageKey);
+    if (savedData) {
+        try {
+            const data = JSON.parse(savedData);
+            gameState.hasPlayed = true;
+            gameState.lastResult = data;
+            showPreviousResult(data);
+        } catch (error) {
+            console.error('Error al cargar datos guardados:', error);
+            localStorage.removeItem(GAME_CONFIG.storageKey);
+        }
+    }
+}
